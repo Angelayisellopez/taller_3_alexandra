@@ -6,17 +6,17 @@ class tester{
         return lista;
     };
     async guardartester(tester){
-        let {id, nombretester}= tester;
+        let {id, nombre}= tester;
         console.log(tester)
-        let [guardar] = await connect.query('insert into tester(id, nombretester) values(?, ?)'
-            [id, nombretester]
+        let [guardar] = await connect.query('INSERT INTO users(name, email, age) VALUES '('?', '?', '?'),
+            [id, nombre]
         );
         return{id: guardar.insertid,...tester};
     }
     async actualizartester (id,tester){
-        let {nombretester} = tester;
-        let [actualizar] = await db.connect.query ('UPDATE proyecto SSET nombretester= ? WHERE id = ?',
-            [nombretester, id]
+        let {nombre} = tester;
+        let [actualizar] = await db.connect.query ('UPDATE proyecto SSET nombre= ?, email=?, age=?, WHERE id = ?',
+            [nombre, id]
         );
         return actualizar.affectedRows > 0;
     }

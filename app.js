@@ -1,12 +1,20 @@
-const testerRoutes=require('./routes/testerRoutes')
+const pruebasRouter = require('./routes/pruebaRoutes');
+const testerRouter = require('./routes/testerRoutes');
+const proyectoRouter = require('./routes/proyectoRoutes');
+const {config} = require('dotenv');
 const express = require('express');
 const app = express();
-require('dotenv').config();
-const port = process.env.PORT;
+require("dotenv").config()
+app.use(express.json());
+const port = process.env.port;
 
-app.use('./api/tester', testerRoutes)
+
+app.use('/api/pruebas', pruebasRouter);
+app.use('/api/proyecto', proyectoRouter)
+app.use('/api/tester', testerRouter);
 
 
-app.listen(port, () =>{
-    console.log("el servidor esta corriendo en el puerto", port)
-})
+
+app.listen(port,() => {
+    console.log(`Server running at http://localhost:${port}`);
+});

@@ -1,12 +1,14 @@
-const myql = require ('mysql2');
-const dotenv = require('dotenv');
+let mysql = require('mysql2/promise');
 
-dotenv.config();
+const conn=mysql.createPool({
+    host:'localhost',
+    user:'root',
+    password:'123456789',
+    database:'testdb',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 
-const pool = myql.createPool({
-    host: process.env.BD_HOST,
-    user: process.env.BD_USER,
-    password: process.env.BD_PASSWORD,
-    database: process.env.BD_NAME,
 });
-module.exports = pool.promise();
+
+module.exports=conn;
